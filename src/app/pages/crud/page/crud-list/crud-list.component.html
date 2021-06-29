@@ -1,0 +1,41 @@
+<section>
+	<div class="row">
+		<div class="col-md-12 col-12"
+			style="cursor: pointer;">
+			<mat-icon (click)="navigateTo()">
+				arrow_back
+			</mat-icon>
+		</div>
+
+		<div class="col-md-12 col-12">
+			<app-search [placeholder]="'Search'"
+				(searchChange)="updateSearch($event)"></app-search>
+
+			<button mat-flat-button
+				color="primary"
+				class="float-right"
+				(click)="navigateToAdd()">
+				<mat-icon class="mr-2">
+					add
+				</mat-icon>
+
+				Add New Data
+			</button>
+		</div>
+
+		<div class="col-md-12 col-12">
+			<ng-container *ngIf="!isLoading; else isSpinner">
+				<app-table [table]="table"
+					(updatePage)="updatePage($event)"
+					(clickButton)="onClickButton($event)"></app-table>
+			</ng-container>
+		</div>
+	</div>
+</section>
+
+<ng-template #isSpinner>
+	<div class="text-center my-auto">
+		<img src="../../../../../assets/images/spinner.svg"
+			style="width: 200px;">
+	</div>
+</ng-template>

@@ -1,0 +1,15 @@
+.radio-button {
+	.mat-radio-button {
+		margin-left: 16px;
+	}
+}
+
+.radio-button-flex {
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
+
+	&-button {
+		margin: 5px;
+	}
+}

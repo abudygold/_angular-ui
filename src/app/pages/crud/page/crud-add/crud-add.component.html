@@ -1,0 +1,16 @@
+<section>
+	<div class="row">
+		<div class="col-md-12 col-12"
+			style="cursor: pointer;">
+			<mat-icon (click)="navigateTo()">
+				arrow_back
+			</mat-icon>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-12">
+			<app-crud-form (formSubmit)="formSubmit($event)"></app-crud-form>
+		</div>
+	</div>
+</section>

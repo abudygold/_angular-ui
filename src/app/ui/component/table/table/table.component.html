@@ -1,0 +1,147 @@
+<table mat-table
+	matSort
+	matSortDisableClear
+	class="w-100 mb-3"
+	[dataSource]="table.dataSource"
+	(matSortChange)="sort()">
+
+	<!-- Generate Sequence Number -->
+	<ng-container *ngIf="table.isSequence"
+		matColumnDef="no">
+		<th mat-header-cell
+			*matHeaderCellDef>
+			No
+		</th>
+
+		<td mat-cell
+			*matCellDef="let row; let i = index">
+			{{ table.getNumber(i) }}
+		</td>
+	</ng-container>
+
+	<ng-container [matColumnDef]="column.value"
+		*ngFor="let column of table.columns; let idx = index">
+		<th mat-header-cell
+			*matHeaderCellDef
+			[mat-sort-header]="column.value">
+			{{ table.labels[idx] }}
+		</th>
+
+		<!-- Format: String -->
+		<ng-container *ngIf="column.format === 'string'">
+			<td mat-cell
+				*matCellDef="let row">
+				{{ row[column.value] ? row[column.value] : '-' }}
+			</td>
+		</ng-container>
+
+		<!-- Format: Date -->
+		<ng-container *ngIf="column.format === 'date'">
+			<td mat-cell
+				*matCellDef="let row">
+				<ng-container *ngIf="row[column.value]">
+					{{ row[column.value] | date:'yyyy-MM-dd' }}
+				</ng-container>
+
+				<ng-container *ngIf="!row[column.value]">
+					{{ '-' }}
+				</ng-container>
+			</td>
+		</ng-container>
+
+		<!-- Format: Number -->
+		<ng-container *ngIf="column.format === 'number'">
+			<td mat-cell
+				*matCellDef="let row">
+				<ng-container *ngIf="row[column.value]">
+					{{ row[column.value] | number }}
+				</ng-container>
+
+				<ng-container *ngIf="!row[column.value]">
+					{{ '-' }}
+				</ng-container>
+			</td>
+		</ng-container>
+
+		<!-- Format: Image -->
+		<ng-container *ngIf="column.format === 'image'">
+			<td mat-cell
+				*matCellDef="let row">
+				<img *ngIf="row[column.value]; else noImageDefault"
+					[src]="row[column.value]"
+					[alt]="row[column.value]">
+			</td>
+		</ng-container>
+	</ng-container>
+
+	<!-- Actions -->
+	<ng-container *ngIf="table.actions"
+		matColumnDef="actions">
+		<th mat-header-cell
+			*matHeaderCellDef>
+			Actions
+		</th>
+
+		<td mat-cell
+			*matCellDef="let row">
+
+			<ng-container *ngFor="let button of table.actions">
+				<button mat-flat-button
+					*ngIf="button.type === 'flat'"
+					class="mr-1"
+					[color]="button.color"
+					(click)="onClickButton(row, button.action)">
+					<mat-icon *ngIf="button.icon"
+						class="mr-2">
+						{{ button.icon }}
+					</mat-icon>
+
+					{{ button.label }}
+				</button>
+
+				<button mat-stroked-button
+					*ngIf="button.type === 'stroked'"
+					class="mr-1"
+					[color]="button.color"
+					(click)="onClickButton(row, button.action)">
+					<mat-icon *ngIf="button.icon"
+						class="mr-2">
+						{{ button.icon }}
+					</mat-icon>
+
+					{{ button.label }}
+				</button>
+			</ng-container>
+
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="no-content">
+		<th *matHeaderCellDef
+			[colSpan]="displayColumns.length"> No Data </th>
+	</ng-container>
+
+	<tr mat-header-row
+		*matHeaderRowDef="displayColumns"></tr>
+
+	<tr mat-header-row
+		class="no-content"
+		*matHeaderRowDef="['no-content']"
+		[style.display]="(table.totalData === 0) ? 'table-row' : 'none'"></tr>
+
+	<tr mat-row
+		*matRowDef="let row; columns: displayColumns;"></tr>
+</table>
+
+<mat-paginator *ngIf="table.isPagination"
+	#matPaginator
+	[length]="table.totalData"
+	[pageSize]="table.pageSize"
+	[pageIndex]="table.getPageIndex()"
+	[pageSizeOptions]="[5,10,25,50,100]"
+	(page)="pageIndex($event)">
+</mat-paginator>
+
+<ng-template #noImageDefault>
+	<img src="../../../../../assets/images/avatars/default.jpg">
+</ng-template>

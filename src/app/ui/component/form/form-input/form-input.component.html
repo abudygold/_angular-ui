@@ -1,0 +1,29 @@
+<mat-form-field [appearance]="formInput.appearance"
+	[floatLabel]="formInput.floatLabel"
+	class="w-100">
+
+	<input *ngIf="formInput.type === 'number'"
+		matInput
+		appOnlyNumber
+		[placeholder]="formInput.placeholder"
+		[formControl]="control">
+
+	<input *ngIf="formInput.type !== 'number'"
+		matInput
+		[placeholder]="formInput.placeholder"
+		[formControl]="control">
+
+	<mat-icon matPrefix
+		*ngIf="formInput.prefix">
+		{{ formInput.suffix }}
+	</mat-icon>
+
+	<mat-icon matSuffix
+		*ngIf="formInput.suffix">
+		{{ formInput.suffix }}
+	</mat-icon>
+
+	<mat-hint *ngIf="formInput.hint">
+		{{ formInput.hint }}
+	</mat-hint>
+</mat-form-field>

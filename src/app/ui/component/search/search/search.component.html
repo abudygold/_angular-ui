@@ -1,0 +1,13 @@
+<mat-form-field floatLabel="never"
+	class="w-25">
+	<mat-icon matPrefix
+		class="mr-2">
+		search
+	</mat-icon>
+
+	<input matInput
+		autocomplete="off"
+		[formControl]="form"
+		[placeholder]="placeholder"
+		(input)="onInput()">
+</mat-form-field>

@@ -1,0 +1,25 @@
+<mat-form-field [appearance]="formInput.appearance"
+	[floatLabel]="formInput.floatLabel"
+	class="w-100">
+
+	<mat-select [formControl]="control">
+		<mat-option *ngFor="let option of optionList"
+			[value]="option.value">
+			{{ option.label }}
+		</mat-option>
+	</mat-select>
+
+	<mat-icon matPrefix
+		*ngIf="formInput.prefix">
+		{{ formInput.suffix }}
+	</mat-icon>
+
+	<mat-icon matSuffix
+		*ngIf="formInput.suffix">
+		{{ formInput.suffix }}
+	</mat-icon>
+
+	<mat-hint *ngIf="formInput.hint">
+		{{ formInput.hint }}
+	</mat-hint>
+</mat-form-field>

@@ -1,0 +1,25 @@
+<h2 mat-dialog-title
+	class="font-sbold d-flex justify-content-between">
+	{{ confirmation.title }}
+</h2>
+
+<mat-dialog-content>
+	<div [innerHTML]="confirmation.content"></div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="d-flex justify-content-end mt-4">
+	<button mat-flat-button
+		color="primary"
+		*ngIf="confirmation.btnSubmit"
+		(click)="onClose(true)">
+		{{ confirmation.btnSubmit }}
+	</button>
+
+	<button mat-stroked-button
+		*ngIf="confirmation.btnCancel"
+		color="primary"
+		class="btn-cancel"
+		(click)="onClose(false)">
+		{{ confirmation.btnCancel }}
+	</button>
+</mat-dialog-actions>

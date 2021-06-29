@@ -1,0 +1,25 @@
+<div class="upload-file">
+	<mat-form-field [appearance]="formInput.appearance"
+		[floatLabel]="formInput.floatLabel"
+		class="w-100">
+
+		<button mat-flat-button
+			matPrefix
+			color="primary"
+			type="button"
+			(click)="openFileUpload('upload-file')">Choose File</button>
+
+		<input matInput
+			class="pl-2"
+			id="upload-file-all"
+			[value]="imageData.fileName">
+
+	</mat-form-field>
+
+	<span class="file-input">
+		<input type="file"
+			id="upload-file"
+			[accept]="fileAccept"
+			(change)="doUploadImage($event)">
+	</span>
+</div>

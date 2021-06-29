@@ -1,0 +1,38 @@
+<mat-form-field *ngIf="!form"
+	[appearance]="formInput.appearance"
+	[floatLabel]="formInput.floatLabel"
+	class="w-100">
+
+	<input matInput
+		*ngIf="!form"
+		[matDatepicker]="picker"
+		[formControl]="control">
+
+	<mat-datepicker-toggle matSuffix
+		[for]="picker"></mat-datepicker-toggle>
+
+	<mat-datepicker #picker></mat-datepicker>
+
+</mat-form-field>
+
+<mat-form-field *ngIf="form"
+	[appearance]="formInput.appearance"
+	[floatLabel]="formInput.floatLabel"
+	class="w-100">
+
+	<mat-date-range-input *ngIf="form"
+		[formGroup]="form"
+		[rangePicker]="rangePicker">
+		<input matStartDate
+			formControlName="start"
+			placeholder="Start date">
+		<input matEndDate
+			formControlName="end"
+			placeholder="End date">
+	</mat-date-range-input>
+
+	<mat-datepicker-toggle matSuffix
+		[for]="rangePicker"></mat-datepicker-toggle>
+	<mat-date-range-picker #rangePicker></mat-date-range-picker>
+
+</mat-form-field>

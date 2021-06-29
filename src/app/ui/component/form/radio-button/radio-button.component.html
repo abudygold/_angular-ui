@@ -1,0 +1,12 @@
+<mat-radio-group [ngClass]="isFlex ? 'radio-button-flex' : 'radio-button'"
+	[formControl]="control">
+
+	<mat-radio-button *ngFor="let option of optionList"
+		[ngClass]="{ 'radio-button-flex-button' : isFlex }"
+		[value]="option.value">
+
+		{{ option.label }}
+
+	</mat-radio-button>
+
+</mat-radio-group>

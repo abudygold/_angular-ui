@@ -1,0 +1,72 @@
+<form [formGroup]="form"
+	autocomplete="off"
+	class="w-50 mx-auto">
+	<div class="form-group">
+		<label class="w-100"> Title </label>
+
+		<app-select-option [formInput]="formInput[0]"
+			[optionList]="titleOption"
+			[control]="form.get('title')"></app-select-option>
+	</div>
+
+	<div class="form-group">
+		<label class="w-100"> First Name </label>
+
+		<app-form-input [formInput]="formInput[0]"
+			[control]="form.get('firstName')"></app-form-input>
+	</div>
+
+	<div class="form-group">
+		<label class="w-100"> Last Name </label>
+
+		<app-form-input [formInput]="formInput[0]"
+			[control]="form.get('lastName')"></app-form-input>
+	</div>
+
+	<div class="form-group">
+		<label class="w-100"> Date of Birth </label>
+
+		<app-datepicker [formInput]="formInput[0]"
+			[control]="form.get('dateOfBirth')"></app-datepicker>
+
+		<!-- Range Date -->
+		<!-- <app-datepicker [formInput]="formInput[0]"
+			[form]="form"></app-datepicker> -->
+	</div>
+
+	<div class="form-group">
+		<label class="w-100"> Gender </label>
+
+		<app-radio-button [optionList]="genderOption"
+			[control]="form.get('gender')"></app-radio-button>
+	</div>
+
+	<div class="form-group">
+		<label class="w-100"> Phone </label>
+
+		<app-form-input [formInput]="formInput[1]"
+			[control]="form.get('phone')"></app-form-input>
+	</div>
+
+	<div class="form-group">
+		<label class="w-100"> Picture </label>
+
+		<img *ngIf="form.get('picture').value; else noImageDefault"
+			[src]="form.get('picture').value"
+			[alt]="form.get('picture').value"
+			style="width: 100%; height: auto;">
+
+		<app-upload-file [allowedFileExt]="allowedFileExt"
+			[formInput]="formInput[2]"
+			(fileSelected)="fileSelected($event)"></app-upload-file>
+	</div>
+
+	<button mat-flat-button
+		color="primary"
+		class="w-100"
+		(click)="onSubmit()">Save</button>
+</form>
+
+<ng-template #noImageDefault>
+	<img src="../../../../../assets/images/avatars/default.jpg">
+</ng-template>
